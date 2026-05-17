@@ -7,16 +7,14 @@ public class GotaBuena extends ObjetoCaida {
     private Sound sonidoRecoleccion;
 
     public GotaBuena(Texture textura, float x, float y, Sound sonido) {
-        super(textura, x, y); // Llama al constructor de la clase abstracta padre
+        super(textura, x, y); 
         this.sonidoRecoleccion = sonido;
     }
 
     @Override
-    public void chocarConTarro(Tarro tarro) {
-        if (this.isActivo()) {
-            tarro.sumarPuntos(10);
-            sonidoRecoleccion.play();
-            this.setActivo(false); // Cambiamos el booleano porque ya la atrapamos
-        }
+    protected void aplicarEfectoColision(Tarro tarro) {
+        tarro.sumarPuntos(10);
+        sonidoRecoleccion.play();
+        this.setActivo(false); 
     }
 }

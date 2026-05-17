@@ -33,44 +33,38 @@ public class Lluvia {
         rainMusic.play();                                                                            
     }                                                                                                
                                                                                                      
-    private void crearGotaDeLluvia() {                                                               
-        float x = MathUtils.random(0, 800 - 64);                                                     	
-        float y = 480;                                                                               
+    private void crearGotaDeLluvia() {
+        float x = MathUtils.random(0, 800 - 64);
+        float y = 480;
+        
+        if (MathUtils.random(1, 10) < 3) {
+            ObjetoCaida gotaMala = new GotaMala(texturaGotaMala, x, y);
+            gotaMala.setEstrategia(new MovimientoZigZag()); // nueva estrategia
+            gotas.add(gotaMala);
+        } else {
+            gotas.add(new GotaBuena(texturaGotaBuena, x, y, dropSound));
+        }
+        lastDropTime = TimeUtils.nanoTime();
+    }                                                     
+                                                                                                
                                                                                                      
-        // Un 20% de probabilidad de generar una gota mala (números 1 o 2 de 10)                     
-        if (MathUtils.random(1, 10) < 3) {                                                           
-            gotas.add(new GotaMala(texturaGotaMala, x, y));                                          
-        } else {                                                                                     
-            gotas.add(new GotaBuena(texturaGotaBuena, x, y, dropSound));                             
-        }                                                                                            
-        lastDropTime = TimeUtils.nanoTime();                                                         
-    }                                                                                                
-                                                                                                     
-    public void actualizarMovimiento(Tarro tarro) {                                                  
-        // Generar nuevas gotas de lluvia cada cierto tiempo                                         
-        if (TimeUtils.nanoTime() - lastDropTime > 100000000) {                                       
-            crearGotaDeLluvia();                                                                     	
-        }                                                                                            
-                                                                                                     
-        // Iterar sobre las gotas                                                                    
-        for (int i = 0; i < gotas.size; i++) {                                                       
-            ObjetoCaida gota = gotas.get(i);                                                         
-                                                                                                     
-            // Le decimos a la gota que caiga (le pasamos velocidad y deltaTime)                     
-            gota.caer(300, Gdx.graphics.getDeltaTime());                                             
-                                                                                                     
-            // Si choca con el tarro, ejecutamos el método de la interfaz                            
-            if (gota.getHitbox().overlaps(tarro.getArea())) {                                        
-                gota.chocarConTarro(tarro);                                                          
-            }                                                                                        
-                                                                                                     
-            // Revisar el estado lógico para saber si debemos borrarla de la lista                   
-            // (Ya sea porque chocó contra el piso o porque el tarro la atrapó)                      
-            if (!gota.isActivo()) {                                                                  
-                gotas.removeIndex(i);                                                                
-                i--; // Importante: restar 1 a 'i' para no saltarnos la siguiente gota al borrar esta
-            }                                                                                        
-        }                                                                                            
+    public void actualizarMovimiento(Tarro tarro) {
+        if (TimeUtils.nanoTime() - lastDropTime > 100000000) {
+            crearGotaDeLluvia();
+        }
+
+        for (int i = 0; i < gotas.size; i++) {
+            ObjetoCaida gota = gotas.get(i);
+            
+            // LLAMADA AL TEMPLATE METHOD
+            // La gota se mueve, revisa el suelo y revisa si chocó con el tarro ella sola
+            gota.procesarFrame(300, Gdx.graphics.getDeltaTime(), tarro);
+
+            if (!gota.isActivo()) {
+                gotas.removeIndex(i);
+                i--; 
+            }
+        }
     }                                                                                                
                                                                                                      
     public void actualizarDibujoLluvia(SpriteBatch batch) {                                          
