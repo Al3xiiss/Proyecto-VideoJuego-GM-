@@ -7,7 +7,7 @@ El proyecto consiste en una versión completamente reimplementada y tematizada d
 ## 🎮 Mecánicas del Juego
 
 * **Objetivo:** Controlas a un Aldeano que debe recolectar esmeraldas/agua que caen del cielo para acumular puntos mientras evita los bloques de lava ardiente.
-* **Condición de Victoria:** Lograr salvar al aldeano alcanzando una meta estricta de **1300 puntos**.
+* **Condición de Victoria:** Lograr salvar al aldeano alcanzando una meta estricta de **1100 puntos**.
 * **Condición de Derrota:** Perder las 3 vidas disponibles al ser alcanzado por la lava.
 * **Dificultad Progresiva:** La velocidad de caída de los objetos aumenta dinámicamente con cada punto obtenido, generando una curva de desafío fluida.
 
@@ -43,8 +43,3 @@ Para garantizar un código limpio, desacoplado y escalable siguiendo las buenas 
 ### Prerrequisitos
 * **Java JDK 11** o superior.
 * **Eclipse IDE** (o cualquier entorno compatible con Gradle).
-
-### Configuración del Repositorio
-1. Clona este repositorio en tu máquina local:
-   ```bash
-   git clone [https://github.com/tu-usuario/GameLluvia-Java.git](https://github.com/tu-usuario/GameLluvia-Java.git)
