@@ -14,7 +14,7 @@ public class GotaBuena extends ObjetoCaida {
     @Override
     protected void aplicarEfectoColision(Tarro tarro) {
         tarro.sumarPuntos(10);
-        sonidoRecoleccion.play();
+        sonidoRecoleccion.play(0.1f);
         this.setActivo(false); 
     }
 }
