@@ -1,7 +1,7 @@
 package puppy.code;
 
 public class NivelBuilder {
-    // Valores por defecto (Dificultad Normal)
+    // Valores por defecto para (Dificultad Normal)
     private float velocidad = 300f; 
     private int probabilidadMala = 3; 
 
@@ -10,7 +10,7 @@ public class NivelBuilder {
         return this; // Retornar 'this' permite encadenar los métodos
     }
 
-    public NivelBuilder setProbabilidadGotaMala(int probabilidad) {
+    public NivelBuilder setProbabilidadLava(int probabilidad) {
         this.probabilidadMala = probabilidad;
         return this;
     }

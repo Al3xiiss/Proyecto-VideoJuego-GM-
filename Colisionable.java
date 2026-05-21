@@ -1,5 +1,5 @@
 package puppy.code;
 
 public interface Colisionable {
-	void chocarConTarro(Tarro tarro);
+	void chocarConAldeano(Aldeano aldeano);
 }

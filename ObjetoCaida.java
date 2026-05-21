@@ -17,26 +17,22 @@ public abstract class ObjetoCaida implements Colisionable {
         this.estrategia = new MovimientoRecto(); 
     }
 
-    // GM-8: TEMPLATE METHOD (Plantilla del ciclo de vida del objeto)
-    public final void procesarFrame(float velocidad, float deltaTime, Tarro tarro) {
-        if (!activo) return; // Si ya no está activo, ignoramos todo
+    // GM-8: TEMPLATE METHOD
+    public final void procesarFrame(float velocidad, float deltaTime, Aldeano aldeano) {
+        if (!activo) return; 
         
-        // Paso 1 de la plantilla: Moverse (Delega al Strategy GM-7)
         estrategia.mover(hitbox, velocidad, deltaTime);
         
-        // Paso 2 de la plantilla: Verificar límites (si toca el suelo)
         if (hitbox.y + 64 < 0) {
             activo = false;
         }
         
-        // Paso 3 de la plantilla: Verificar colisión con el tarro
-        if (hitbox.overlaps(tarro.getArea())) {
-            aplicarEfectoColision(tarro); // Este paso lo definen las hijas
+        if (hitbox.overlaps(aldeano.getArea())) {
+            aplicarEfectoColision(aldeano); 
         }
     }
 
-    // Método que las clases hijas están obligadas a programar
-    protected abstract void aplicarEfectoColision(Tarro tarro);
+    protected abstract void aplicarEfectoColision(Aldeano aldeano);
 
     public void dibujar(SpriteBatch batch) {
         if (activo) {
@@ -52,7 +48,6 @@ public abstract class ObjetoCaida implements Colisionable {
     public boolean isActivo() { return activo; }
     public void setActivo(boolean activo) { this.activo = activo; }
     
-    // Dejamos este vacío por defecto para cumplir con la interfaz original si se necesita
     @Override
-    public void chocarConTarro(Tarro tarro) {}
+    public void chocarConAldeano(Aldeano aldeano) {}
 }
