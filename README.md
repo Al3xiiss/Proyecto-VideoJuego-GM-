@@ -38,6 +38,7 @@ Para garantizar un código limpio, desacoplado y escalable siguiendo las buenas 
 
 ---
 
+```mermaid
 classDiagram
     %% Clases base de LibGDX
     class ApplicationAdapter {
@@ -200,8 +201,7 @@ classDiagram
     SalvaAlAldeano ..> AdministradorJuego : Llama a
     Aldeano ..> AdministradorJuego : Llama a
     GestorCaida ..> AdministradorJuego : Llama a
-
-
+```
 
 ## 🛠️ Requisitos e Instalación
 
