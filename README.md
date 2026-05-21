@@ -38,6 +38,171 @@ Para garantizar un código limpio, desacoplado y escalable siguiendo las buenas 
 
 ---
 
+classDiagram
+    %% Clases base de LibGDX
+    class ApplicationAdapter {
+        <<LibGDX>>
+        +create()
+        +render()
+        +dispose()
+    }
+
+    %% Patrón Singleton
+    class AdministradorJuego {
+        - instancia : AdministradorJuego$
+        - vidas : int
+        - puntos : int
+        - juegoTerminado : boolean
+        - AdministradorJuego()
+        + getInstance() AdministradorJuego$
+        + iniciarNuevoJuego() void
+        + getVidas() int
+        + getPuntos() int
+        + isJuegoTerminado() boolean
+        + sumarPuntos(cantidad : int) void
+        + restarVida() void
+    }
+
+    %% Clase Principal
+    class SalvaAlAldeano {
+        - batch : SpriteBatch
+        - font : BitmapFont
+        - camera : OrthographicCamera
+        - aldeano : Aldeano
+        - gestorCaida : GestorCaida
+        - fondo : Texture
+        - enMenu : boolean
+        - juegoGanado : boolean
+        + create() void
+        + render() void
+        + dispose() void
+    }
+
+    class Aldeano {
+        - hitbox : Rectangle
+        - imagenAldeano : Texture
+        - sonidoHerido : Sound
+        - velx : int
+        - herido : boolean
+        - tiempoHeridoMax : int
+        - tiempoHerido : int
+        + Aldeano(tex : Texture, ss : Sound)
+        + crear() void
+        + actualizarMovimiento() void
+        + dibujar(batch : SpriteBatch) void
+        + dañar() void
+        + sumarPuntos(pp : int) void
+        + estaHerido() boolean
+        + getArea() Rectangle
+    }
+
+    class GestorCaida {
+        - objetos : Array~ObjetoCaida~
+        - lastDropTime : long
+        - texturaEsmeralda : Texture
+        - texturaLava : Texture
+        - sonidoEsmeralda : Sound
+        - musicaFondo : Music
+        - configNivel : ConfiguracionNivel
+        + GestorCaida(texturaEsmeralda: Texture, texturaLava: Texture, ss: Sound, mm: Music)
+        + crear() void
+        - crearObjetoCaida() void
+        + actualizarMovimiento(aldeano : Aldeano) void
+        + actualizarDibujo(batch : SpriteBatch) void
+        + detenerMusica() void
+        + destruir() void
+    }
+
+    %% Patrón Builder
+    class NivelBuilder {
+        - velocidad : float
+        - probabilidadMala : int
+        + setVelocidadCaida(velocidad : float) NivelBuilder
+        + setProbabilidadLava(probabilidad : int) NivelBuilder
+        + build() ConfiguracionNivel
+    }
+
+    class ConfiguracionNivel {
+        - velocidadCaida : float
+        - probabilidadLava : int
+        + ConfiguracionNivel(velocidad : float, probabilidad : int)
+        + getVelocidadCaida() float
+        + getProbabilidadLava() int
+    }
+
+    %% Jerarquía Template Method
+    class Colisionable {
+        <<Interface>>
+        + chocarConAldeano(aldeano : Aldeano) void
+    }
+
+    class ObjetoCaida {
+        <<Abstract>>
+        - hitbox : Rectangle
+        - textura : Texture
+        - activo : boolean
+        # estrategia : EstrategiaMovimiento
+        + ObjetoCaida(textura : Texture, x : float, y : float)
+        + procesarFrame(velocidad : float, deltaTime : float, aldeano : Aldeano) void
+        # aplicarEfectoColision(aldeano : Aldeano)* void
+        + dibujar(batch : SpriteBatch) void
+        + chocarConAldeano(aldeano : Aldeano) void
+        + setEstrategia(nuevaEstrategia : EstrategiaMovimiento) void
+        + getHitbox() Rectangle
+        + isActivo() boolean
+        + setActivo(activo : boolean) void
+    }
+
+    class Esmeralda {
+        - sonidoRecoleccion : Sound
+        + Esmeralda(textura : Texture, x : float, y : float, sonido : Sound)
+        # aplicarEfectoColision(aldeano : Aldeano) void
+    }
+
+    class Lava {
+        + Lava(textura : Texture, x : float, y : float)
+        # aplicarEfectoColision(aldeano : Aldeano) void
+    }
+
+    %% Patrón Strategy
+    class EstrategiaMovimiento {
+        <<Interface>>
+        + mover(hitbox : Rectangle, velocidad : float, deltaTime : float) void
+    }
+
+    class MovimientoRecto {
+        + mover(hitbox : Rectangle, velocidad : float, deltaTime : float) void
+    }
+
+    class MovimientoZigZag {
+        - tiempo : float
+        + mover(hitbox : Rectangle, velocidad : float, deltaTime : float) void
+    }
+
+    %% Relaciones de Herencia y Realización
+    ApplicationAdapter <|-- SalvaAlAldeano
+    Colisionable <|.. ObjetoCaida
+    ObjetoCaida <|-- Esmeralda
+    ObjetoCaida <|-- Lava
+    EstrategiaMovimiento <|.. MovimientoRecto
+    EstrategiaMovimiento <|.. MovimientoZigZag
+
+    %% Relaciones de Composición y Agregación
+    SalvaAlAldeano *-- Aldeano : Tiene
+    SalvaAlAldeano *-- GestorCaida : Tiene
+    GestorCaida *-- ObjetoCaida : Contiene (Array)
+    GestorCaida *-- ConfiguracionNivel : Tiene
+    ObjetoCaida o-- EstrategiaMovimiento : Usa
+
+    %% Dependencias
+    GestorCaida ..> NivelBuilder : Usa
+    NivelBuilder ..> ConfiguracionNivel : Crea
+    SalvaAlAldeano ..> AdministradorJuego : Llama a
+    Aldeano ..> AdministradorJuego : Llama a
+    GestorCaida ..> AdministradorJuego : Llama a
+
+
+
 ## 🛠️ Requisitos e Instalación
 
 ### Prerrequisitos
