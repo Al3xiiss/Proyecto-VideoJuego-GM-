@@ -31,7 +31,8 @@ public abstract class ObjetoCaida implements Colisionable {
             aplicarEfectoColision(aldeano); 
         }
     }
-
+    
+    // Paso protegido: Obliga a las hijas a definir que pasa al chocar
     protected abstract void aplicarEfectoColision(Aldeano aldeano);
 
     public void dibujar(SpriteBatch batch) {
