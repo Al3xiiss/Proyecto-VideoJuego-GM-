@@ -4,7 +4,7 @@
 
 El proyecto consiste en una versión completamente reimplementada y tematizada del clásico juego de atrapar gotas, adaptada con mecánicas, lógica avanzada de colisiones, polifonía de audio y la estética visual de Minecraft.
 
-## 🎮 Mecánicas del Juego
+##  Mecánicas del Juego
 
 * **Objetivo:** Controlas a un Aldeano que debe recolectar esmeraldas que caen del cielo para acumular puntos mientras evita los bloques de lava ardiente.
 * **Condición de Victoria:** Lograr salvar al aldeano alcanzando una meta estricta de **1100 puntos**.
@@ -13,7 +13,7 @@ El proyecto consiste en una versión completamente reimplementada y tematizada d
 
 ---
 
-## ⌨️ Controles
+##  Controles
 
 * **Flecha Izquierda / Derecha:** Mover al aldeano.
 * **Barra Espaciadora:** Iniciar el juego desde el menú principal.
@@ -22,7 +22,7 @@ El proyecto consiste en una versión completamente reimplementada y tematizada d
 
 ---
 
-## 🏗️ Patrones de Diseño Implementados
+##  Patrones de Diseño Implementados
 
 Para garantizar un código limpio, desacoplado y escalable siguiendo las buenas prácticas de la ingeniería de software, se utilizaron los siguientes patrones arquitectónicos:
 
@@ -36,7 +36,7 @@ Para garantizar un código limpio, desacoplado y escalable siguiendo las buenas 
 
 ---
 
-## 🚀 Características Técnicas Destacadas
+##  Características Técnicas Destacadas
 
 * **Optimización del Spawneo (Hitbox Fantasma):** Implementación de una validación predictiva mediante un objeto `Rectangle` temporal y ligero antes de instanciar elementos pesados en memoria. Evita la superposición física de entidades en el área de nacimiento superior.
 * **Lógica de Estados Circular:** Arquitectura de estados fluida controlada por teclado que permite reiniciar de manera inmediata la partida o navegar en ciclos continuos de regreso al menú principal de forma segura utilizando variables lógicas (booleanos).
@@ -44,7 +44,7 @@ Para garantizar un código limpio, desacoplado y escalable siguiendo las buenas 
 
 ---
 
-## 🛠️ Requisitos e Instalación
+##  Requisitos e Instalación
 
 ### Prerrequisitos
 * **Java JDK 11** o superior.
@@ -57,7 +57,7 @@ Para garantizar un código limpio, desacoplado y escalable siguiendo las buenas 
 
 ---
 
-## 👥 Equipo de Desarrollo
+##  Equipo de Desarrollo
 
 * **Alexis Escobar:** Desarrollo de código, refactorización y lógica de patrones de diseño.
 * **Yael Astorga:** Documentación, informes y elaboración de diagramas UML.
