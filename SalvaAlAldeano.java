@@ -28,8 +28,8 @@ public class SalvaAlAldeano extends ApplicationAdapter {
 		font = new BitmapFont(); 
 		font.getData().setScale(1.5f);
 		 
-		Sound dañoAldeano = Gdx.audio.newSound(Gdx.files.internal("DañoAldeano.ogg"));
-		aldeano = new Aldeano(new Texture(Gdx.files.internal("aldeanoo.png")), dañoAldeano);
+		Sound hitAldeano = Gdx.audio.newSound(Gdx.files.internal("hitAldeano.ogg"));
+		aldeano = new Aldeano(new Texture(Gdx.files.internal("aldeanoo.png")), hitAldeano);
          
 		Texture esmeralda = new Texture(Gdx.files.internal("esmeralda.png")); 
 		Texture lava = new Texture(Gdx.files.internal("lava.png"));
